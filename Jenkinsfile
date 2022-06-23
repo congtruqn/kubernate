@@ -12,7 +12,7 @@ pipeline {
         
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/andreipope/HelloWorld'
+        git 'https://github.com/congtruqn/kubernate'
       }
     }
         
