@@ -1,7 +1,7 @@
 pipeline {
   environment { 
     registry = "congtruqn/testapp" 
-    registryCredential = credentials('dockerhub')
+    registryCredential = 'dockerhub'
     dockerImage = '' 
   }
   agent any
