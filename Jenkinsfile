@@ -1,4 +1,9 @@
 pipeline {
+  environment { 
+    registry = "congtruqn/testapp" 
+    registryCredential = 'dockerhub_id' 
+    dockerImage = '' 
+  }
   agent any
     
   tools {nodejs "node"}
@@ -13,6 +18,7 @@ pipeline {
         
     stage('Install dependencies') {
       steps {
+        sh 'echo  ${registry}'
         sh 'npm install'
       }
     }
