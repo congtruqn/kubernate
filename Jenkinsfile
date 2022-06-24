@@ -33,10 +33,10 @@ pipeline {
     //   }
     // }
      
-    stage('Test') {
-      steps {
-         //sh 'npm start'
-      }
-    }      
+    // stage('Test') {
+    //   steps {
+    //      //sh 'npm start'
+    //   }
+    // }      
   }
 }
