@@ -2,9 +2,10 @@
   "name": "HelloWorld",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "create-env": "printenv > .env",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
