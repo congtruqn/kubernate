@@ -38,10 +38,14 @@ pipeline {
     }
     stage('Deploy to GKE') {
         steps{
-          script {
-            sh "sed -i 's/testapp:latest/testapp:${env.BUILD_ID}/g' deployment.yaml"
-            kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes")
+          withKubeConfig([credentialsId: 'kubernetes']) {
+            sh 'cat deployment.yaml | sed "s/testapp/latest/g" | kubectl apply -f -'
+            sh 'kubectl apply -f deployment.yaml'
           }
+          // script {
+          //   sh "sed -i 's/testapp:latest/testapp:${env.BUILD_ID}/g' deployment.yaml"
+          //   kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes")
+          // }
               // sh "sed -i 's/testapp:latest/testapp:${env.BUILD_ID}/g' deployment.yaml"
               // sh "kubectl apply -f deployment.yaml"
         }
