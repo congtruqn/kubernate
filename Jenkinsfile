@@ -11,21 +11,30 @@ pipeline {
   stages {
         
     stage('Cloning Git') {
+      // steps {
+      //   git 'https://github.com/congtruqn/kubernate'
+      // }
       steps {
-        git 'https://github.com/congtruqn/kubernate'
+        checkout scm
       }
     }
-        
-    stage('Install dependencies') {
+    stage("Build image") {
       steps {
-        sh 'echo  ${registryCredential}'
-        sh 'npm install'
-      }
+        script {
+            myapp = docker.build("congtruqn/testapp:${env.BUILD_ID}")
+          }
+        }
+    }        
+    stage('Install dependencies') {
+      // steps {
+      //   sh 'echo  ${registryCredential}'
+      //   sh 'npm install'
+      // }
     }
      
     stage('Test') {
       steps {
-         sh 'npm start'
+         //sh 'npm start'
       }
     }      
   }
