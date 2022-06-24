@@ -36,17 +36,11 @@ pipeline {
             }
         }
     }
-    // stage('Install dependencies') {
-    //   steps {
-    //     sh 'echo  ${registryCredential}'
-    //     sh 'npm install'
-    //   }
-    // }
-     
-    // stage('Test') {
-    //   steps {
-    //      //sh 'npm start'
-    //   }
-    // }      
+    stage('Deploy to GKE') {
+        steps{
+              sh "sed -i 's/testapp:latest/testapp:${env.BUILD_ID}/g' deployment.yaml"
+              sh "kubectl apply -f deployment.yaml"
+        }
+    }     
   }
 }
