@@ -18,19 +18,20 @@ pipeline {
         checkout scm
       }
     }
-    stage("Build image") {
+
+    stage('Build image') {
       steps {
         script {
             myapp = docker.build("congtruqn/testapp:${env.BUILD_ID}")
           }
-        }
-    }        
-    stage('Install dependencies') {
-      // steps {
-      //   sh 'echo  ${registryCredential}'
-      //   sh 'npm install'
-      // }
-    }
+      }
+    }  
+    // stage('Install dependencies') {
+    //   steps {
+    //     sh 'echo  ${registryCredential}'
+    //     sh 'npm install'
+    //   }
+    // }
      
     stage('Test') {
       steps {
