@@ -31,7 +31,7 @@ pipeline {
             script {
                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                   myapp.push("latest")
-                  //myapp.push("${env.BUILD_ID}")
+                  myapp.push("${env.BUILD_ID}")
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
     stage('Deploy to GKE') {
         steps{
           withKubeConfig([credentialsId: 'kubernetes']) {
-            sh 'cat deployment.yaml | sed "s/testapp:latest/testapp:${env.BUILD_ID}g" | kubectl apply -f -'
+            sh 'cat deployment.yaml | sed "s/testapp:latest/testapp:${env.BUILD_ID}/g" | kubectl apply -f -'
             sh 'cat deployment.yaml'
             sh 'kubectl apply -f deployment.yaml'
           }
