@@ -39,7 +39,7 @@ pipeline {
     stage('Deploy to GKE') {
         steps{
           withKubeConfig([credentialsId: 'kubernetes']) {
-            sh 'cat deployment.yaml | sed "s/testapp:latest/testapp:${env.BUILD_ID}/g" | kubectl apply -f -'
+            sh "sed -i 's/testapp:latest/testapp:${env.BUILD_ID}/g' deployment.yaml"
             sh 'cat deployment.yaml'
             sh 'kubectl apply -f deployment.yaml'
           }
