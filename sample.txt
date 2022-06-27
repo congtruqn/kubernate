@@ -1,0 +1,19 @@
+sudo rm /etc/containerd/config.toml
+sudo systemctl restart containerd
+
+kubectl taint node master node-role.kubernetes.io/master:NoSchedule-
+kubectl taint nodes --all node-role.kubernetes.io/master:-
+kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
+
+export kubever=$(kubectl version | base64 | tr -d '\n')
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
+
+kubectl expose deployment nginx-deployment  --type=NodePort --port=80
+
+install kubenetet cli on jenkin
+https://plugins.jenkins.io/kubernetes-cli/
+
+kubectl get deployment
+
+sudo chmod 666 /var/run/docker.sock
