@@ -1,9 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: testapp
-labels:
-  app: testapp
 spec:
 strategy:
   type: Recreate
@@ -25,9 +22,6 @@ template:
 apiVersion: v1
 kind: Service
 metadata:
-name: testapp
-labels:
-  app: testapp
 spec:
 ports:
   - port: 5000
