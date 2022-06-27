@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: testapp
+  namespace: default
 spec:
-strategy:
-  type: Recreate
-template:
-  metadata:
-    labels:
-      app: testapp
-      tier: testapp
-  spec:
-    containers:
-    - name: testapp
-      image: congtruqn/testapp:latest
-      imagePullPolicy: Always
-      ports:
-      - containerPort: 5000
-        name: testapp
-
+  replicas: 1
+  selector:
+    matchLabels:
+      bb: web
+  template:
+    metadata:
+      labels:
+        bb: web
+    spec:
+      containers:
+      - name: testapp
+        image: congtruqn/testapp:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  name: bb-entrypoint
+  namespace: default
 spec:
-ports:
+  type: NodePort
+  selector:
+    bb: web
+  ports:
   - port: 5000
     targetPort: 5000
-selector:
-  app: testapp
-  tier: testapp
-type: LoadBalancer
+    nodePort: 3000
