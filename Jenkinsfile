@@ -31,7 +31,7 @@ pipeline {
             script {
                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                   myapp.push("latest")
-                  myapp.push("${env.BUILD_ID}")
+                  //myapp.push("${env.BUILD_ID}")
                 }
             }
         }
@@ -40,6 +40,7 @@ pipeline {
         steps{
           withKubeConfig([credentialsId: 'kubernetes']) {
             sh "sed -i 's/testapp:latest/testapp:${env.BUILD_ID}/g' deployment.yaml"
+            sh 'cat deployment.yaml'
             sh 'kubectl apply -f deployment.yaml'
           }
           // script {
