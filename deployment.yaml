@@ -16,6 +16,8 @@ spec:
       containers:
       - name: testapp
         image: congtruqn/testapp:latest
+      imagePullSecrets:
+      - name: dockerreg
 ---
 apiVersion: v1
 kind: Service
