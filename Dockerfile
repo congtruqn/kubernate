@@ -1,16 +1,12 @@
-FROM node:16
+FROM node:14-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /opt/eks-nodejs-demo
 
-ENV PORT 3000
+COPY package-lock.json /opt/eks-nodejs-demo
+COPY package.json /opt/eks-nodejs-demo
+RUN npm ci --silent
 
-COPY package*.json ./
-
-RUN npm install
-
-# Copy the local code to the container
 COPY . .
 
-
-# Start the service
-CMD npm start
+EXPOSE 3000
+CMD ["npm", "start"]
