@@ -1,16 +1,8 @@
-FROM node:18
-
-WORKDIR /usr/src/app
-
-ENV PORT 3000
-
-COPY package*.json ./
-
+FROM node:18.16.0-alpine3.17
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+COPY src/package.json src/package-lock.json .
 RUN npm install
-
-# Copy the local code to the container
-COPY . .
-
-
-# Start the service
-CMD npm start
+COPY src/ .
+EXPOSE 3000
+CMD [ "npm", "start"]
