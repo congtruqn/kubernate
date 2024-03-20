@@ -1,8 +1,16 @@
-FROM node:18
-RUN mkdir -p /opt/app
-WORKDIR /opt/app
-COPY src/package.json src/package-lock.json .
+FROM node:14
+
+WORKDIR /usr/src/app
+
+ENV PORT 3000
+
+COPY package*.json ./
+
 RUN npm install
-COPY src/ .
-EXPOSE 3000
-CMD [ "npm", "start"]
+
+# Copy the local code to the container
+COPY . .
+
+
+# Start the service
+CMD npm start
