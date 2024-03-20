@@ -7,7 +7,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 
 export kubever=$(kubectl version | base64 | tr -d '\n')
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever" 1
 
 kubectl expose deployment nginx-deployment  --type=NodePort --port=80
 
