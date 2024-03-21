@@ -16,7 +16,7 @@ phases:
       - echo Building the Docker image...
       - docker login --username ${DOCKER_HUB_USERNAME} --password ${DOCKER_HUB_PASSWORD}
       - docker build -t ${IMAGE_REPO_NAME}:latest .
-      - docker tag $IMAGE_REPO_URL:latest $IMAGE_REPO_URL:$IMAGE_TAG
+      - docker tag $IMAGE_REPO_NAME:latest $IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
