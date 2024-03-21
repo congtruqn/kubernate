@@ -7,7 +7,8 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.get('/', async function (req, res) {
   const test = await axios.get('https://tns.vn');
-  res.send(test);
+  console.log(test)
+  res.send('test');
 });
 
 app.listen(PORT);
