@@ -26,4 +26,14 @@ phases:
       - echo Writing image definitions file...
       - printf '[{"name":"hello-world","imageUri":"%s"}]' ${IMAGE_REPO_URL}:$IMAGE_TAG > imagedefinitions.json
 artifacts:
-    files: imagedefinitions.json
+    files:
+      - 'image*.json'
+      - 'appspec.yaml'
+      - 'taskdef.json'
+    DefinitionArtifact:
+      files:
+        - appspec.yaml
+        - taskdef.json
+    ImageArtifact:
+      files:
+        - imageDetail.json     
