@@ -29,11 +29,4 @@ artifacts:
     files:
       - 'image*.json'
       - 'appspec.yaml'
-      - 'taskdef.json'
-    DefinitionArtifact:
-      files:
-        - appspec.yaml
-        - taskdef.json
-    ImageArtifact:
-      files:
-        - imageDetail.json     
+      - 'taskdef.json'  
