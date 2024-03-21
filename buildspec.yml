@@ -9,14 +9,14 @@ phases:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=$${COMMIT_HASH:=latest} 
+      - IMAGE_TAG=${COMMIT_HASH:=latest} 
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker login --username ${DOCKER_HUB_USERNAME} --password ${DOCKER_HUB_PASSWORD}
       - docker build -t ${IMAGE_REPO_NAME}:latest .
-      - docker tag $IMAGE_REPO_NAME:latest $IMAGE_REPO_URL:$IMAGE_TAG
+      - docker tag $IMAGE_REPO_URL:latest $IMAGE_REPO_URL:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
