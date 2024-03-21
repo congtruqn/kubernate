@@ -7,6 +7,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
+      - docker login --username ${DOCKER_HUB_USERNAME} --password ${DOCKER_HUB_PASSWORD}
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest} 
@@ -14,15 +15,14 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker login --username ${DOCKER_HUB_USERNAME} --password ${DOCKER_HUB_PASSWORD}
       - docker build -t ${IMAGE_REPO_NAME}:latest .
-      - docker tag $IMAGE_REPO_NAME:latest $IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker tag $IMAGE_REPO_URL:latest $IMAGE_REPO_URL:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push ${IMAGE_REPO_NAME}:latest
-      - docker push ${IMAGE_REPO_NAME}:$IMAGE_TAG
+      - docker push ${IMAGE_REPO_URL}:latest
+      - docker push ${IMAGE_REPO_URL}:$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name":"hello-world","imageUri":"%s"}]' ${IMAGE_REPO_URL}:$IMAGE_TAG > imagedefinitions.json
 artifacts:
