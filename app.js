@@ -7,13 +7,13 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.get('/', async function (req, res) {
   try {
-    const a = await axios.get('https://tns.vn')
-    console.log(a);
+    //const a = await axios.get('https://tns.vn')
+    console.log('');
   }
   catch (e) {
     console.log(e)
-   }
-  res.send('Hello world 11111 tru tran');
+  }
+  res.send('Hello world!');
 });
 
 app.listen(PORT);
