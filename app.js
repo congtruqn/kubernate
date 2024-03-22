@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const crypto = require('crypto');
 // Constants
 const PORT = process.env.PORT || 3000;
 
@@ -7,13 +8,16 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.get('/', async function (req, res) {
   try {
-    const a = await axios.get('https://www.google.com/')
-    console.log(a);
+    var mykey = crypto.createCipher('aes-128-cbc', 'mypassword');
+    var mystr = mykey.update('abc', 'utf8', 'hex')
+    mystr += mykey.final('hex');
+    
+    console.log(mystr);
   }
   catch (e) {
     console.log(e)
   }
-  res.send('Hello world 1!');
+  res.send('Hello world 3!');
 });
 
 app.listen(PORT);
