@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.get('/', async function (req, res) {
   try {
-    var mykey = crypto.createCipher('aes-128-cbc', 'mypassword');
+    var mykey = crypto.createCipher('aes-128-cbc', 'mypassworddsfds');
     var mystr = mykey.update('abc', 'utf8', 'hex')
     mystr += mykey.final('hex');
     
