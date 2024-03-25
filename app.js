@@ -12,7 +12,7 @@ app.get('/', async function (req, res) {
     var mystr = mykey.update('abc', 'utf8', 'hex')
     mystr += mykey.final('hex');
     
-    console.log(process.env);
+    console.log(process.env?.FRONTEND_VIRTUAL_HOST || process.env);
   }
   catch (e) {
     console.log(e)
