@@ -17,7 +17,7 @@ app.get('/', async function (req, res) {
   catch (e) {
     console.log(e)
   }
-  res.send('Hello world 6!');
+  res.send('Hello world 7!');
 });
 
 app.listen(PORT);
