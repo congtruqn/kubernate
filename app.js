@@ -12,7 +12,7 @@ app.get('/', async function (req, res) {
     var mystr = mykey.update('abc', 'utf8', 'hex')
     mystr += mykey.final('hex');
     
-    console.log(mystr);
+    console.log(process.env.DB_HOST);
   }
   catch (e) {
     console.log(e)
